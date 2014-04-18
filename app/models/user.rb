@@ -35,10 +35,10 @@ class User < ActiveRecord::Base
   #          :source => :question
   #          )
 
-  def completed_polls
-    # Poll.select.where('self.id = polls.author_id')
-    User.includes(:responses => :question_answered)
-        .where('responses.respondent_id = self.id')
-  end
+  # def completed_polls
+  #   # Poll.select.where('self.id = polls.author_id')
+  #   User.includes(:responses => :question_answered)
+  #       .where('responses.respondent_id = self.id')
+  # end
 
 end

@@ -1,13 +1,29 @@
 class Response < ActiveRecord::Base
   validates :answer_choice_id, :respondent_id, presence: true
+  
   validate :respondent_has_not_already_answered_question
   validate :author_is_not_respondent
 
-  belongs_to :question_answered, through: :answer_choice, source: :question, class_name: 'Question'
+  belongs_to( 
+             :question_answered, 
+             :through => :answer_choice, 
+             :source => :question, 
+             :class_name => 'Question'
+             )
 
-  belongs_to :answer_choice, foreign_key: :answer_choice_id, primary_key: :id, class_name: 'AnswerChoice'
+  belongs_to( 
+            :answer_choice, 
+            :foreign_key => :answer_choice_id, 
+            :primary_key => :id, 
+            :class_name => 'AnswerChoice'
+            )
 
-  belongs_to :respondent, foreign_key: :respondent_id, primary_key: :id, class_name: 'User'
+  belongs_to( 
+            :respondent, 
+            :foreign_key => :respondent_id, 
+            :primary_key => :id, 
+            :class_name => 'User'
+            )
 
 
   def respondent_has_not_already_answered_question
